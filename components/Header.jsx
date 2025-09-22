@@ -46,10 +46,10 @@ const Header = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-white border-b border-purple-100">
           <div className="px-4 py-4 space-y-4">
-            <a href="#features" className="block text-gray-700 hover:text-kaleleaf hover:font-semibold transition-all duration-200">Features</a>
-            <a href="#safety" className="block text-gray-700 hover:text-kaleleaf hover:font-semibold transition-all duration-200">Safety</a>
-            <a href="#experts" className="block text-gray-700 hover:text-kaleleaf hover:font-semibold transition-all duration-200">Experts</a>
-            <a href="#institutions" className="block text-gray-700 hover:text-kaleleaf hover:font-semibold transition-all duration-200">For Institutions</a>
+            <a href="#features" className="block text-gray-700 hover:font-semibold hover:text-radiate transition-all duration-300">Features</a>
+            <a href="#safety" className="block text-gray-700 hover:font-semibold hover:text-radiate transition-all duration-300">Safety</a>
+            <a href="#experts" className="block text-gray-700 hover:font-semibold hover:text-radiate transition-all duration-300">Experts</a>
+            <a href="#institutions" className="block text-gray-700 hover:font-semibold hover:text-radiate transition-all duration-300">For Institutions</a>
             <div className="pt-4 space-y-2">
               <button className="w-full px-4 py-2 text-moss border border-kaleleaf rounded-full font-semibold cursor-pointer">
                 Sign In

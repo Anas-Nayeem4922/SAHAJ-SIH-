@@ -140,21 +140,21 @@ export default function Chat() {
                   {chat.role === "user" ? (
                     <div className="flex justify-end">
                       <div className="flex items-start gap-3 max-w-[80%]">
-                        <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-4 rounded-2xl rounded-tr-sm shadow-lg">
+                        <div className="bg-turmeric text-white p-2 rounded-2xl rounded-tr-sm shadow-lg">
                           <p className="text-sm leading-relaxed">
                             {chat.content}
                           </p>
                         </div>
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center mt-1 shadow-md">
-                          <User className="w-5 h-5 text-purple-600" />
+                        <div className="w-10 h-10 rounded-full bg-radicchio flex items-center justify-center shadow-md">
+                          <User className="w-5 h-5 text-pearl" />
                         </div>
                       </div>
                     </div>
                   ) : (
                     <div className="flex justify-start">
                       <div className="flex items-start gap-3 max-w-[80%]">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center mt-1 shadow-md">
-                          <Bot className="w-5 h-5 text-blue-600" />
+                        <div className="min-w-10 h-10 rounded-full bg-cherrylite flex items-center justify-center mt-1 shadow-md">
+                          <Bot className="w-5 h-5 text-cherry" />
                         </div>
                         <div className="bg-white/90 backdrop-blur-sm text-gray-800 p-4 rounded-2xl rounded-tl-sm shadow-lg border border-purple-100">
                           <p className="text-sm leading-relaxed whitespace-pre-wrap">
@@ -200,8 +200,8 @@ export default function Chat() {
             {isLoading && (
               <div className="flex justify-start">
                 <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center shadow-md">
-                    <Bot className="w-5 h-5 text-blue-600" />
+                  <div className="w-10 h-10 rounded-full bg-cherrylite flex items-center justify-center shadow-md">
+                    <Bot className="w-5 h-5 text-cherry" />
                   </div>
                   <div className="bg-white/90 backdrop-blur-sm p-4 rounded-2xl rounded-tl-sm shadow-lg border border-purple-100">
                     <span className="text-sm text-gray-600">
