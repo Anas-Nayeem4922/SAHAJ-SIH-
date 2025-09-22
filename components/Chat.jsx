@@ -41,13 +41,6 @@ export default function Chat() {
     },
   })
 
-  // Load existing chats when dialog opens
-  useEffect(() => {
-    if (isOpen) {
-      loadChats()
-    }
-  }, [isOpen])
-
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
     if (chatRef.current) {
@@ -55,69 +48,49 @@ export default function Chat() {
     }
   }, [messages])
 
-  const loadChats = async () => {
-    try {
-      const response = await fetch("/api/questionaire")
-      const data = await response.json()
-      setMessages(data.chats || [])
-    } catch (error) {
-      console.error("Failed to load chats:", error)
-    }
-  }
-
   async function onSubmit(values) {
     if (isLoading) return
-
     setIsLoading(true)
+
     const userMessage = values.message
-    
+    const lastThreeMessages = messages.slice(-3).map((m) => ({
+      role: m.role,
+      content: m.content,
+    }))
+
     try {
-      // Get AI response
-      const chatResponse = await fetch("/api/chat", {
+      // Send user message + last 3 messages as history
+      const res = await fetch("/api/ai", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ question: userMessage }),
-      })
-
-      const chatData = await chatResponse.json()
-      const aiAnswer = chatData.answer
-
-      // Save to database
-      const saveResponse = await fetch("/api/questionaire", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          question: userMessage,
-          answer: aiAnswer,
+          message: userMessage,
+          history: lastThreeMessages,
         }),
       })
 
-      if (saveResponse.ok) {
-        // Add to local state immediately for better UX
-        const newMessage = {
-          id: Date.now().toString(),
-          question: userMessage,
-          answer: aiAnswer,
-          timestamp: new Date(),
-        }
-        setMessages(prev => [...prev, newMessage])
-      }
+      const data = await res.json()
+      const aiReply = data.result || "No response received"
+
+      // Update local state
+      setMessages((prev) => [
+        ...prev,
+        { id: Date.now() + "-u", role: "user", content: userMessage },
+        { id: Date.now() + "-a", role: "assistant", content: aiReply },
+      ])
 
       form.reset()
     } catch (error) {
       console.error("Error:", error)
-      // Show error message to user
-      const errorMessage = {
-        id: Date.now().toString(),
-        question: userMessage,
-        answer: "I apologize, but I encountered an error. Please try again.",
-        timestamp: new Date(),
-      }
-      setMessages(prev => [...prev, errorMessage])
+      setMessages((prev) => [
+        ...prev,
+        { id: Date.now() + "-u", role: "user", content: userMessage },
+        {
+          id: Date.now() + "-a",
+          role: "assistant",
+          content: "⚠️ Something went wrong. Please try again.",
+        },
+      ])
     } finally {
       setIsLoading(false)
     }
@@ -133,8 +106,8 @@ export default function Chat() {
               Chat with Sahaj
             </span>
           </Button>
-
         </DialogTrigger>
+
         <DialogContent className="h-[85vh] max-h-[700px] w-full max-w-3xl flex flex-col p-0 bg-gradient-to-br from-oat via-pearl to-butter border-0 rounded-3xl shadow-2xl">
           <DialogHeader className="px-8 py-6 bg-white/80 backdrop-blur-sm rounded-t-3xl border-b border-purple-100">
             <DialogTitle className="flex items-center gap-3 text-2xl font-bold">
@@ -145,53 +118,66 @@ export default function Chat() {
                 <span className="bg-cherry bg-clip-text text-transparent">
                   SAHAJ AI Assistant
                 </span>
-                <p className="text-sm font-normal text-radiate mt-1">Your mental wellness companion</p>
+                <p className="text-sm font-normal text-radiate mt-1">
+                  Your mental wellness companion
+                </p>
               </div>
             </DialogTitle>
           </DialogHeader>
 
+          {/* Messages */}
           <div
             ref={chatRef}
             className="flex-1 overflow-y-auto p-6 space-y-6 bg-gradient-to-b from-white/50 to-purple-50/30 backdrop-blur-sm"
           >
             {messages.length > 0 ? (
               messages.map((chat, index) => (
-                <div key={chat.id} className="space-y-4 animate-in fade-in slide-in-from-bottom duration-500" style={{ animationDelay: `${index * 0.1}s` }}>
-                  {/* User Message */}
-                  <div className="flex justify-end">
-                    <div className="flex items-start gap-3 max-w-[80%]">
-                      <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-4 rounded-2xl rounded-tr-sm shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                        <p className="text-sm leading-relaxed">{chat.question}</p>
-                      </div>
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center mt-1 shadow-md">
-                        <User className="w-5 h-5 text-purple-600" />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* AI Response */}
-                  <div className="flex justify-start">
-                    <div className="flex items-start gap-3 max-w-[80%]">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center mt-1 shadow-md">
-                        <Bot className="w-5 h-5 text-blue-600" />
-                      </div>
-                      <div className="bg-white/90 backdrop-blur-sm text-gray-800 p-4 rounded-2xl rounded-tl-sm shadow-lg hover:shadow-xl transition-all duration-300 border border-purple-100">
-                        <p className="text-sm leading-relaxed whitespace-pre-wrap">{chat.answer}</p>
+                <div
+                  key={chat.id}
+                  className="space-y-4 animate-in fade-in slide-in-from-bottom duration-500"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  {chat.role === "user" ? (
+                    <div className="flex justify-end">
+                      <div className="flex items-start gap-3 max-w-[80%]">
+                        <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-4 rounded-2xl rounded-tr-sm shadow-lg">
+                          <p className="text-sm leading-relaxed">
+                            {chat.content}
+                          </p>
+                        </div>
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center mt-1 shadow-md">
+                          <User className="w-5 h-5 text-purple-600" />
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  ) : (
+                    <div className="flex justify-start">
+                      <div className="flex items-start gap-3 max-w-[80%]">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center mt-1 shadow-md">
+                          <Bot className="w-5 h-5 text-blue-600" />
+                        </div>
+                        <div className="bg-white/90 backdrop-blur-sm text-gray-800 p-4 rounded-2xl rounded-tl-sm shadow-lg border border-purple-100">
+                          <p className="text-sm leading-relaxed whitespace-pre-wrap">
+                            {chat.content}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               ))
             ) : (
-              <div className="flex flex-col items-center justify-center h-full text-center animate-in fade-in zoom-in duration-700">
+              <div className="flex flex-col items-center justify-center h-full text-center">
                 <div className="w-24 h-24 bg-gradient-to-br from-turmeric to-cherry rounded-full flex items-center justify-center mb-6 animate-bounce shadow-xl">
                   <Sparkles className="w-12 h-12 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-cherry bg-clip-text mb-4">
+                <h3 className="text-2xl font-bold text-cherry mb-4">
                   Welcome to SAHAJ AI
                 </h3>
                 <p className="text-gray-600 max-w-md leading-relaxed mb-6">
-                  Your compassionate AI companion is here to listen, support, and guide you through your mental wellness journey. Start a conversation and discover personalized insights.
+                  Your compassionate AI companion is here to listen, support,
+                  and guide you. Start a conversation and discover personalized
+                  insights.
                 </p>
                 <div className="flex items-center gap-6 text-sm text-gray-500">
                   <div className="flex items-center gap-2">
@@ -212,18 +198,15 @@ export default function Chat() {
 
             {/* Loading indicator */}
             {isLoading && (
-              <div className="flex justify-start animate-in fade-in slide-in-from-left duration-300">
+              <div className="flex justify-start">
                 <div className="flex items-start gap-3">
                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center shadow-md">
                     <Bot className="w-5 h-5 text-blue-600" />
                   </div>
                   <div className="bg-white/90 backdrop-blur-sm p-4 rounded-2xl rounded-tl-sm shadow-lg border border-purple-100">
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full animate-bounce" />
-                      <div className="w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full animate-bounce" style={{ animationDelay: "0.1s" }} />
-                      <div className="w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }} />
-                      <span className="text-sm text-gray-600 ml-2">SAHAJ is thinking...</span>
-                    </div>
+                    <span className="text-sm text-gray-600">
+                      SAHAJ is thinking...
+                    </span>
                   </div>
                 </div>
               </div>
@@ -231,7 +214,8 @@ export default function Chat() {
           </div>
 
           <Separator className="bg-gradient-to-r from-orange-300 to-orange-500" />
-          
+
+          {/* Input form */}
           <div className="p-6 bg-white/80 backdrop-blur-sm rounded-b-3xl">
             <Form {...form}>
               <form
@@ -246,7 +230,7 @@ export default function Chat() {
                       <FormControl>
                         <Input
                           placeholder="Share what's on your mind with SAHAJ..."
-                          className="min-h-12 border-2 border-orange-300 rounded-2xl px-4 py-3 text-gray-800 placeholder:text-gray-500 transition-all duration-300 bg-white/90 backdrop-blur-sm"
+                          className="min-h-12 border-2 border-orange-300 rounded-2xl px-4 py-3 text-gray-800"
                           disabled={isLoading}
                           {...field}
                         />
@@ -255,11 +239,10 @@ export default function Chat() {
                     </FormItem>
                   )}
                 />
-                <Button 
-                  type="submit" 
-                  size="default" 
+                <Button
+                  type="submit"
                   disabled={isLoading}
-                  className="bg-cherry hover:bg-red-900 text-white border-0 rounded-2xl px-6 py-3 font-semibold shadow-lg cursor-pointer hover:shadow-xl transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                  className="bg-cherry hover:bg-red-900 text-white border-0 rounded-2xl px-6 py-3 font-semibold shadow-lg cursor-pointer hover:shadow-xl transform hover:scale-105 disabled:opacity-50"
                 >
                   <Send className="w-4 h-4" />
                 </Button>
