@@ -8,92 +8,21 @@ const WellbeingQuiz = ({ onClose }) => {
   const [showResults, setShowResults] = useState(false);
 
   const questions = [
-    {
-      id: 1,
-      question: "In the past two weeks, have you felt down, sad, or hopeless?",
-      category: "Mood",
-      type: 'objective'
-    },
-    {
-      id: 2,
-      question: "Do you find it hard to enjoy activities you usually like?",
-      category: "Mood/Depression",
-      type: 'objective'
-    },
-    {
-      id: 3,
-      question: "Do you feel nervous, anxious, or on edge almost daily?",
-      category: "Anxiety",
-      type: 'objective'
-    },
-    {
-      id: 4,
-      question: "Do you worry too much about studies, future, or personal matters?",
-      category: "Stress",
-      type: 'objective'
-    },
-    {
-      id: 5,
-      question: "Do you feel overwhelmed by tasks or deadlines?",
-      category: "Stress/Anxiety",
-      type: 'objective'
-    },
-    {
-      id: 6,
-      question: "Do you often feel exhausted after classes or studying?",
-      category: "Academic burnout",
-      type: 'objective'
-    },
-    {
-      id: 7,
-      question: "Do you feel your efforts in academics are \"never enough\"?",
-      category: "Academic pressure",
-      type: 'objective'
-    },
-    {
-      id: 8,
-      question: "Do you often feel lonely, even when surrounded by others?",
-      category: "Social/emotional well-being",
-      type: 'objective'
-    },
-    {
-      id: 9,
-      question: "Do you find it difficult to share your feelings with friends/family?",
-      category: "Social support",
-      type: 'objective'
-    },
-    {
-      id: 10,
-      question: "Do you use social media excessively or late at night?",
-      category: "Lifestyle balance",
-      type: 'objective'
-    },
-    // Subjective Questions
-    {
-      id: 11,
-      question: "What usually stresses you out the most in your daily life?",
-      type: 'subjective'
-    },
-    {
-      id: 12,
-      question: "When you feel low or anxious, what do you normally do to cope?",
-      type: 'subjective'
-    },
-    {
-      id: 13,
-      question: "Who do you feel most comfortable talking to when you're struggling, and why?",
-      type: 'subjective'
-    },
-    {
-      id: 14,
-      question: "What changes in college life (academics, environment, or support) would help your mental well-being?",
-      type: 'subjective'
-    },
-    {
-      id: 15,
-      question: "Describe a moment when you felt truly happy or motivated in recent weeks. What made it meaningful?",
-      type: 'subjective'
-    }
+    { id: 1, question: "In the past two weeks, have you felt down, sad, or hopeless?", category: "Mood", type: 'objective' },
+    { id: 2, question: "Do you find it hard to enjoy activities you usually like?", category: "Mood/Depression", type: 'objective' },
+    { id: 3, question: "Do you feel nervous, anxious, or on edge almost daily?", category: "Anxiety", type: 'objective' },
+    { id: 4, question: "Do you worry too much about studies, future, or personal matters?", category: "Stress", type: 'objective' },
+    { id: 5, question: "Do you feel overwhelmed by tasks or deadlines?", category: "Stress/Anxiety", type: 'objective' },
+    { id: 6, question: "Do you often feel exhausted after classes or studying?", category: "Academic burnout", type: 'objective' },
+    { id: 7, question: "Do you feel your efforts in academics are \"never enough\"?", category: "Academic pressure", type: 'objective' },
+    { id: 8, question: "Do you often feel lonely, even when surrounded by others?", category: "Social/emotional well-being", type: 'objective' },
+    { id: 9, question: "Do you find it difficult to share your feelings with friends/family?", category: "Social support", type: 'objective' },
+    { id: 10, question: "Do you use social media excessively or late at night?", category: "Lifestyle balance", type: 'objective' },
+    { id: 11, question: "What usually stresses you out the most in your daily life?", type: 'subjective' },
+    { id: 12, question: "When you feel low or anxious, what do you normally do to cope?", type: 'subjective' },
+    { id: 13, question: "Who do you feel most comfortable talking to when you're struggling, and why?", type: 'subjective' },
+    { id: 14, question: "What changes in college life (academics, environment, or support) would help your mental well-being?", type: 'subjective' },
+    { id: 15, question: "Describe a moment when you felt truly happy or motivated in recent weeks. What made it meaningful?", type: 'subjective' }
   ];
 
   const scaleLabels = ['Almost every day', 'Often', 'Sometimes', 'Not at all'];
@@ -128,7 +57,7 @@ const WellbeingQuiz = ({ onClose }) => {
       .map(([, value]) => scaleScores[value]);
     
     const totalScore = objectiveAnswers.reduce((sum, score) => sum + score, 0);
-    const maxScore = 10 * 3; // 10 objective questions × 3 max points each
+    const maxScore = 10 * 3;
     return Math.round((totalScore / maxScore) * 100);
   };
 
@@ -254,7 +183,7 @@ const WellbeingQuiz = ({ onClose }) => {
               <X className="w-6 h-6 text-gray-600" />
             </button>
             <div className="flex items-center space-x-2">
-              <Brain className="w-6 h-6 text-purple-600" />
+              <Brain className="w-6 h-6 text-cherry" />
               <span className="font-semibold text-gray-800">Wellbeing Assessment</span>
             </div>
             <div className="text-sm text-gray-500">
@@ -265,7 +194,7 @@ const WellbeingQuiz = ({ onClose }) => {
           {/* Progress Bar */}
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div 
-              className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-500 ease-out"
+              className="bg-gradient-to-r from-radicchio to-cherry h-2 rounded-full transition-all duration-500 ease-out"
               style={{ width: `${progress}%` }}
             ></div>
           </div>
@@ -273,22 +202,25 @@ const WellbeingQuiz = ({ onClose }) => {
 
         {/* Question Content */}
         <div className="p-8">
-          <div className="mb-8 animate-in slide-in-from-right duration-500" key={currentQuestion}>
-            {currentQ.type === 'objective' && (
+          <div
+            className="mb-8 animate-in slide-in-from-right duration-500"
+            key={currentQuestion}
+          >
+            {currentQ.type === "objective" && (
               <div className="text-center mb-2">
-                <span className="inline-block px-3 py-1 bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 rounded-full text-sm font-medium">
+                <span className="inline-block px-3 py-1 bg-butter text-cherry rounded-full text-sm font-medium">
                   {currentQ.category}
                 </span>
               </div>
             )}
-            
-            <h2 className="text-2xl font-bold text-gray-800 mb-8 text-center leading-relaxed">
+
+            <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center leading-relaxed">
               {currentQ.question}
             </h2>
 
-            {currentQ.type === 'objective' ? (
+            {currentQ.type === "objective" ? (
               <div className="space-y-4">
-                <p className="text-center text-gray-600 mb-6">
+                <p className="text-center text-muted-foreground mb-6">
                   Select how often this applies to you:
                 </p>
                 <div className="grid gap-3">
@@ -298,24 +230,28 @@ const WellbeingQuiz = ({ onClose }) => {
                       onClick={() => handleObjectiveAnswer(currentQ.id, index)}
                       className={`p-4 rounded-2xl border-2 transition-all duration-300 transform hover:scale-105 ${
                         answers[currentQ.id] === index
-                          ? 'border-purple-500 bg-gradient-to-r from-purple-50 to-pink-50 shadow-lg'
-                          : 'border-gray-200 hover:border-purple-300 hover:bg-purple-50'
+                          ? "border-cherry bg-butter shadow-lg"
+                          : "border-cherry/40 hover:border-cherry hover:bg-butter/70"
                       }`}
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-3">
-                          <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                            answers[currentQ.id] === index
-                              ? 'border-purple-500 bg-purple-500'
-                              : 'border-gray-300'
-                          }`}>
+                          <div
+                            className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
+                              answers[currentQ.id] === index
+                                ? "border-cherry bg-cherry"
+                                : "border-slate-900/30"
+                            }`}
+                          >
                             {answers[currentQ.id] === index && (
                               <CheckCircle className="w-4 h-4 text-white" />
                             )}
                           </div>
-                          <span className="font-medium text-gray-800">{label}</span>
+                          <span className="font-medium text-slate-900">{label}</span>
                         </div>
-                        <span className="text-sm text-gray-500 font-semibold">{scaleScores[index]}</span>
+                        <span className="text-sm text-slate-900/60 font-semibold">
+                          {scaleScores[index]}
+                        </span>
                       </div>
                     </button>
                   ))}
@@ -323,64 +259,66 @@ const WellbeingQuiz = ({ onClose }) => {
               </div>
             ) : (
               <div className="space-y-4">
-                <p className="text-center text-gray-600 mb-6">
+                <p className="text-center text-cherry/70 mb-6">
                   Take your time to reflect and share your thoughts honestly:
                 </p>
                 <textarea
-                  value={answers[currentQ.id] || ''}
-                  onChange={(e) => handleSubjectiveAnswer(currentQ.id, e.target.value)}
+                  value={answers[currentQ.id] || ""}
+                  onChange={(e) =>
+                    handleSubjectiveAnswer(currentQ.id, e.target.value)
+                  }
                   placeholder="Share what's on your mind... Your honest response helps us understand you better and provide more personalized support."
-                  className="w-full h-32 p-4 border-2 border-gray-200 rounded-2xl focus:border-purple-500 focus:outline-none resize-none transition-all duration-300"
+                  className="w-full h-32 p-4 border-2 border-cherry/30 rounded-2xl focus:border-cherry focus:outline-none resize-none transition-all duration-300 bg-butter/30 text-slate-950"
                   rows={4}
                 />
               </div>
             )}
           </div>
+        </div>
 
-          {/* Navigation */}
-          <div className="flex justify-between items-center">
-            <button
-              onClick={prevQuestion}
-              disabled={currentQuestion === 0}
-              className={`flex items-center space-x-2 px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
-                currentQuestion === 0
-                  ? 'text-gray-400 cursor-not-allowed'
-                  : 'text-purple-600 hover:bg-purple-50 transform hover:scale-105'
-              }`}
-            >
-              <ChevronLeft className="w-5 h-5" />
-              <span>Previous</span>
-            </button>
+        {/* Navigation */}
+        <div className="flex justify-between items-center p-6">
+          <button
+            onClick={prevQuestion}
+            disabled={currentQuestion === 0}
+            className={`flex items-center space-x-2 px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
+              currentQuestion === 0
+                ? 'text-gray-400 cursor-not-allowed'
+                : 'text-cherry hover:text-cherry transform hover:scale-105 cursor-pointer'
+            }`}
+          >
+            <ChevronLeft className="w-5 h-5" />
+            <span>Previous</span>
+          </button>
 
-            <div className="flex space-x-2">
-              {questions.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentQuestion(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentQuestion
-                      ? 'bg-purple-500 scale-125'
-                      : index < currentQuestion
-                      ? 'bg-green-400'
-                      : 'bg-gray-300'
-                  }`}
-                />
-              ))}
-            </div>
-
-            <button
-              onClick={nextQuestion}
-              disabled={answers[currentQ.id] === undefined || answers[currentQ.id] === ''}
-              className={`flex items-center space-x-2 px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
-                answers[currentQ.id] === undefined || answers[currentQ.id] === ''
-                  ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                  : 'bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:shadow-lg transform hover:scale-105'
-              }`}
-            >
-              <span>{currentQuestion === questions.length - 1 ? 'Complete' : 'Next'}</span>
-              <ChevronRight className="w-5 h-5" />
-            </button>
+          <div className="flex space-x-2">
+            {questions.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentQuestion(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  index === currentQuestion
+                    ? 'bg-cherry scale-125'
+                    : index < currentQuestion
+                    ? 'bg-cherry/60'
+                    : 'bg-gray-300'
+                }`}
+              />
+            ))}
           </div>
+
+          <button
+            onClick={nextQuestion}
+            disabled={answers[currentQ.id] === undefined || answers[currentQ.id] === ''}
+            className={`flex items-center space-x-2 px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
+              answers[currentQ.id] === undefined || answers[currentQ.id] === ''
+                ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                : 'bg-cherry text-butter hover:shadow-lg transform hover:scale-105 cursor-pointer'
+            }`}
+          >
+            <span>{currentQuestion === questions.length - 1 ? 'Complete' : 'Next'}</span>
+            <ChevronRight className="w-5 h-5" />
+          </button>
         </div>
       </div>
     </div>
