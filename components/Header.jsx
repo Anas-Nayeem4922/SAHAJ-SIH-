@@ -1,9 +1,10 @@
 "use client"
 import React, { useState } from 'react';
 import { Menu, X, Heart} from 'lucide-react';
-
+import {useRouter} from 'next/navigation';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router = useRouter()
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-purple-100">
@@ -26,7 +27,7 @@ const Header = () => {
           </nav>
 
           <div className="hidden md:flex items-center space-x-4">
-            <button className="px-4 py-2 text-radicchio font-semibold hover:scale-110 transition-all duration-300 cursor-pointer rounded-md">
+            <button onClick={()=>router.push("/login")} className="px-4 py-2 text-radicchio font-semibold hover:scale-110 transition-all duration-300 cursor-pointer rounded-md">
               Signin
             </button>
             <button className="px-6 py-2 bg-cherry text-pearl rounded-full hover:shadow-lg transform hover:scale-105 transition-all duration-300 cursor-pointer font-semibold">
