@@ -43,7 +43,7 @@ const ExpertsSection = () => {
           <div className="space-y-8">
             <div className="space-y-6">
               <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-purple-400 rounded-xl flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-kaleleaf rounded-xl flex items-center justify-center flex-shrink-0">
                   <Award className="w-6 h-6 text-white" />
                 </div>
                 <div>
@@ -53,7 +53,7 @@ const ExpertsSection = () => {
               </div>
 
               <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-blue-400 rounded-xl flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-radiate rounded-xl flex items-center justify-center flex-shrink-0">
                   <CheckCircle className="w-6 h-6 text-white" />
                 </div>
                 <div>
@@ -63,7 +63,7 @@ const ExpertsSection = () => {
               </div>
 
               <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-purple-400 to-pink-400 rounded-xl flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-radicchio rounded-xl flex items-center justify-center flex-shrink-0">
                   <Users className="w-6 h-6 text-white" />
                 </div>
                 <div>
@@ -78,7 +78,7 @@ const ExpertsSection = () => {
             {experts.map((expert, index) => (
               <div
                 key={index}
-                className="bg-gradient-to-r from-white to-purple-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                className="bg-gradient-to-r from-white to-orange-50 rounded-2xl p-6 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
               >
                 <div className="flex items-center space-x-4">
                   <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
@@ -90,7 +90,7 @@ const ExpertsSection = () => {
                   </div>
                   <div className="flex-1">
                     <h4 className="font-semibold text-gray-800 text-lg">{expert.name}</h4>
-                    <p className="text-purple-600 font-medium">{expert.specialty}</p>
+                    <p className="text-orange-950 font-medium">{expert.specialty}</p>
                     <div className="flex items-center space-x-4 mt-2">
                       <div className="flex items-center space-x-1">
                         <Star className="w-4 h-4 text-yellow-400 fill-current" />
@@ -99,7 +99,7 @@ const ExpertsSection = () => {
                       <div className="text-sm text-gray-500">{expert.sessions}</div>
                     </div>
                   </div>
-                  <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-blue-400 rounded-full flex items-center justify-center">
+                  <div className="w-8 h-8 bg-orange-400 rounded-full flex items-center justify-center">
                     <CheckCircle className="w-5 h-5 text-white" />
                   </div>
                 </div>

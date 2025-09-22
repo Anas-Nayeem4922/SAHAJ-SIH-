@@ -1,5 +1,6 @@
 "use client"
 
+import Chat from "@/components/Chat";
 import CTASection from "@/components/CTASection";
 import ExpertsSection from "@/components/ExpertsSection";
 import Features from "@/components/Features";
@@ -25,6 +26,7 @@ function App() {
       <CTASection onStartQuiz={() => setShowQuiz(true)} />
       <Footer />
       {showQuiz && <WellbeingQuiz onClose={() => setShowQuiz(false)} />}
+      <div className="fixed bottom-10 right-10"><Chat /></div>
     </div>
   );
 }

@@ -3,10 +3,10 @@ import { Brain, Heart, MessageCircle, AArrowDown as SOS } from 'lucide-react';
 
 const CTASection = ({ onStartQuiz }) => {
   return (
-    <section className="py-20 bg-gradient-to-br from-purple-600 via-pink-600 to-blue-600">
+    <section className="py-20 bg-gradient-to-br from-radicchio to-cherry">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-4">
+          <h2 className="text-4xl font-bold text-slate-950 mb-4">
             Ready to Start Your Mental Health Journey?
           </h2>
           <p className="text-xl text-purple-100 max-w-3xl mx-auto">
@@ -52,12 +52,12 @@ const CTASection = ({ onStartQuiz }) => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <button 
             onClick={onStartQuiz}
-            className="group px-8 py-4 bg-white text-purple-600 rounded-full font-semibold hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center space-x-3"
+            className="group px-8 py-4 bg-white/20 backdrop-blur-md text-white border-2 border-white/30 rounded-full font-semibold hover:bg-white/30 hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center space-x-3 cursor-pointer"
           >
             <Brain className="w-5 h-5" />
             <span>Take Wellbeing Assessment</span>
           </button>
-          <button className="group px-8 py-4 bg-white/20 backdrop-blur-md text-white border-2 border-white/30 rounded-full font-semibold hover:bg-white/30 hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center space-x-3">
+          <button className="group px-8 py-4 bg-white/20 backdrop-blur-md text-white border-2 border-white/30 rounded-full font-semibold hover:bg-white/30 hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center space-x-3 cursor-pointer">
             <Heart className="w-5 h-5" />
             <span>Start Meditation Now</span>
           </button>

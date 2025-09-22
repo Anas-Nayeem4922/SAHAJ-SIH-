@@ -3,13 +3,13 @@ import { Brain, MessageCircle, AArrowDown as SOS } from 'lucide-react';
 
 const Hero = ({ onStartQuiz }) => {
   return (
-    <section className="pt-24 pb-16 bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 min-h-screen flex items-center">
+    <section className="pt-24 pb-16 bg-gradient-to-br from-pearl via-oat to-butter min-h-screen flex items-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <div className="space-y-6">
               <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
-                <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-turmeric to-radicchio bg-clip-text text-transparent">
                   Your Mental Health
                 </span>
                 <br />
@@ -24,14 +24,10 @@ const Hero = ({ onStartQuiz }) => {
             <div className="flex flex-col sm:flex-row gap-4">
               <button 
                 onClick={onStartQuiz}
-                className="group px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-semibold hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2"
+                className="group px-8 py-4 bg-turmeric text-moss rounded-full font-semibold hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2"
               >
                 <Brain className="w-5 h-5" />
                 <span>Take Wellbeing Test</span>
-              </button>
-              <button className="group px-8 py-4 bg-white text-purple-600 border-2 border-purple-200 rounded-full font-semibold hover:bg-purple-50 hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
-                <MessageCircle className="w-5 h-5" />
-                <span>Start Meditating</span>
               </button>
             </div>
 
@@ -48,7 +44,7 @@ const Hero = ({ onStartQuiz }) => {
           </div>
 
           <div className="relative">
-            <div className="relative z-10">
+            <div className="relative">
               <div className="bg-white rounded-3xl p-8 shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-500">
                 <div className="space-y-4">
                   <div className="flex items-center space-x-3">
@@ -68,9 +64,6 @@ const Hero = ({ onStartQuiz }) => {
                 </div>
               </div>
             </div>
-            
-            <div className="absolute top-8 right-8 w-32 h-32 bg-gradient-to-br from-pink-200 to-purple-200 rounded-full animate-pulse"></div>
-            <div className="absolute bottom-8 left-8 w-24 h-24 bg-gradient-to-br from-blue-200 to-green-200 rounded-full animate-bounce"></div>
           </div>
         </div>
       </div>

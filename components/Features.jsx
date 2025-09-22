@@ -6,36 +6,36 @@ const features = [
     icon: Brain,
     title: "Smart Student Support",
     description: "Quick self-reflection quizzes identify stress or anxiety in early stages. AI chatbot provides immediate support, motivation, and redirects to helpline and trusted experts.",
-    color: "from-blue-400 to-purple-400",
-    bgColor: "from-blue-50 to-purple-50"
+    color: "from-spinach to-spinach",
+    bgColor: "spinach"
   },
   {
     icon: Shield,
     title: "Safety First",
     description: "Guest mode option with no data saving, or login to track progress. All conversations are encrypted for non-stigmatizing support in a safe, confidential environment.",
-    color: "from-green-400 to-blue-400",
-    bgColor: "from-green-50 to-blue-50"
+    color: "from-kaleleaf to-kaleleaf",
+    bgColor: "kaleleaf"
   },
   {
     icon: BarChart3,
     title: "Help Institutions Help Students",
     description: "Anonymous trend insights for institutions, exam stress alerts, workshop recommendations, and Mental Health Awareness Index to track progress without breaking anonymity.",
-    color: "from-purple-400 to-pink-400",
-    bgColor: "from-purple-50 to-pink-50"
+    color: "from-cherry to-cherry",
+    bgColor: "cherry"
   },
   {
     icon: UserCheck,
     title: "Verified Experts",
     description: "All staff must have post-licensure verification, present ID, and undergo thorough vetting to ensure students work with real, qualified professionals.",
-    color: "from-pink-400 to-red-400",
-    bgColor: "from-pink-50 to-red-50"
+    color: "from-radicchio to-radicchio",
+    bgColor: "radicchio"
   },
   {
     icon: Globe,
     title: "Inclusive and Welcoming",
     description: "Multi-language support across many regions, accessible content, and multiple program access to ensure all students feel comfortable and supported.",
-    color: "from-teal-400 to-green-400",
-    bgColor: "from-teal-50 to-green-50"
+    color: "from-radiate to-radiate",
+    bgColor: "radiate"
   }
 ];
 
