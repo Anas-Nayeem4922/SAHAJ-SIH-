@@ -65,17 +65,17 @@ const WellbeingQuiz = ({ onClose }) => {
     if (score >= 70) return { 
       title: "You're doing great!", 
       message: "Your responses suggest you're managing well. Keep up the good work with self-care!",
-      color: "from-green-400 to-blue-400"
+      color: "from-turmeric to-turmeric"
     };
     if (score >= 40) return { 
       title: "Some areas to focus on", 
       message: "Consider incorporating more stress management techniques and don't hesitate to reach out for support.",
-      color: "from-yellow-400 to-orange-400"
+      color: "from-turmeric to-turmeric"
     };
     return { 
       title: "We're here to help", 
       message: "Your responses suggest you might benefit from additional support. Consider speaking with a mental health professional.",
-      color: "from-pink-400 to-purple-400"
+      color: "from-turmeric to-turmeric"
     };
   };
 
@@ -91,15 +91,15 @@ const WellbeingQuiz = ({ onClose }) => {
         <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto animate-in fade-in zoom-in duration-500">
           <div className="p-8">
             <div className="text-center mb-8">
-              <div className={`w-20 h-20 bg-gradient-to-br ${result.color} rounded-full flex items-center justify-center mx-auto mb-6 animate-bounce`}>
+              <div className={`w-20 h-20 bg-gradient-to-br from-turmeric to-cherry rounded-full flex items-center justify-center mx-auto mb-6 animate-bounce`}>
                 <Sparkles className="w-10 h-10 text-white" />
               </div>
               <h2 className="text-3xl font-bold text-gray-800 mb-4">{result.title}</h2>
               <p className="text-lg text-gray-600 mb-6">{result.message}</p>
               
-              <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-6 mb-8">
+              <div className="bg-gradient-to-r from-pearl to-yellow-100 rounded-2xl p-6 mb-8">
                 <div className="flex items-center justify-center space-x-4 mb-4">
-                  <Brain className="w-8 h-8 text-purple-600" />
+                  <Brain className="w-8 h-8 text-cherry" />
                   <span className="text-2xl font-bold text-gray-800">Wellbeing Score: {score}%</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-4">
@@ -113,7 +113,7 @@ const WellbeingQuiz = ({ onClose }) => {
 
             <div className="space-y-4 mb-8">
               <h3 className="text-xl font-semibold text-gray-800 mb-4">Your Journey Insights:</h3>
-              <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-4 mb-4">
+              <div className="bg-gradient-to-r from-white to-yellow-50 rounded-xl p-4 mb-4">
                 <h4 className="font-semibold text-gray-800 mb-2">Reflective Responses:</h4>
                 <div className="space-y-2 text-sm text-gray-600">
                   {Object.entries(answers)
@@ -130,17 +130,17 @@ const WellbeingQuiz = ({ onClose }) => {
 
               <h3 className="text-xl font-semibold text-gray-800 mb-4">Recommended Next Steps:</h3>
               <div className="grid gap-4">
-                <div className="flex items-center space-x-3 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl hover:shadow-md transition-all duration-300">
-                  <Heart className="w-6 h-6 text-blue-600" />
-                  <span className="text-gray-700">Start with guided meditation sessions</span>
+                <div className="flex items-center space-x-3 p-4 bg-pearl rounded-xl hover:shadow-md transition-all duration-300">
+                  <Heart className="w-6 h-6 text-cherry" />
+                  <span className="text-slate-900">Start with guided meditation sessions</span>
                 </div>
-                <div className="flex items-center space-x-3 p-4 bg-gradient-to-r from-green-50 to-blue-50 rounded-xl hover:shadow-md transition-all duration-300">
-                  <Brain className="w-6 h-6 text-green-600" />
-                  <span className="text-gray-700">Connect with our AI support chat</span>
+                <div className="flex items-center space-x-3 p-4 bg-pearl to-blue-50 rounded-xl hover:shadow-md transition-all duration-300">
+                  <Brain className="w-6 h-6 text-cherry" />
+                  <span className="text-slate-900">Connect with our AI support chat</span>
                 </div>
-                <div className="flex items-center space-x-3 p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl hover:shadow-md transition-all duration-300">
-                  <Star className="w-6 h-6 text-purple-600" />
-                  <span className="text-gray-700">Speak with a verified mental health expert</span>
+                <div className="flex items-center space-x-3 p-4 bg-pearl rounded-xl hover:shadow-md transition-all duration-300">
+                  <Star className="w-6 h-6 text-cherry" />
+                  <span className="text-slate-900">Speak with a verified mental health expert</span>
                 </div>
               </div>
             </div>
@@ -148,7 +148,7 @@ const WellbeingQuiz = ({ onClose }) => {
             <div className="flex flex-col sm:flex-row gap-4">
               <button
                 onClick={onClose}
-                className="flex-1 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+                className="flex-1 px-6 py-3 bg-cherry text-butter rounded-full font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300 cursor-pointer"
               >
                 Start Your Journey
               </button>
@@ -159,7 +159,7 @@ const WellbeingQuiz = ({ onClose }) => {
                   setIsCompleted(false);
                   setShowResults(false);
                 }}
-                className="flex-1 px-6 py-3 bg-white text-purple-600 border-2 border-purple-200 rounded-full font-semibold hover:bg-purple-50 hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+                className="flex-1 px-6 py-3 bg-white text-cherry border-2 border-cherry/50 rounded-full font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300 cursor-pointer"
               >
                 Retake Quiz
               </button>
